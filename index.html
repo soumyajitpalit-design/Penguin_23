@@ -1,801 +1,1045 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You! // Pink Penguin Dev Poster & Game</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: JetBrains Mono for code aesthetic & Quicksand for cute UI -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                        sans: ['"Quicksand"', 'sans-serif'],
-                    },
-                    colors: {
-                        plum: {
-                            950: '#1f0d18',
-                            900: '#2d1423',
-                            800: '#421d33',
-                            700: '#5e2948',
-                        },
-                        rosepink: {
-                            50: '#fff1f5',
-                            100: '#ffe4ec',
-                            200: '#fecdd9',
-                            300: '#fda4ba',
-                            400: '#fb7195',
-                            500: '#f43f70',
-                            600: '#e11d56',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You, Khushi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-pink: #fff5f8;
+      --bg-pink-2: #ffe8f0;
+      --card: #ffffff;
+      --ink: #241720;
+      --muted: #6e5564;
+      --pink: #e94b8a;
+      --pink-dark: #c9326e;
+      --pink-soft: #ffe1ec;
+      --plum: #23141e;
+      --plum-text: #fcebf2;
+      --border: #f5d6e3;
+      --shadow: 0 14px 36px rgba(186, 56, 108, 0.09);
+    }
 
-    <style>
-        /* Custom Animations & Game Styling */
-        body {
-            background: radial-gradient(circle at top left, #ffe4ec 0%, #fecdd9 45%, #fbcfe8 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Floating Snowflakes & Hearts Background */
-        @keyframes floatDown {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.85;
-            }
-            85% {
-                opacity: 0.85;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, #ffdbe9 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, #ffe6f0 0%, transparent 45%),
+        linear-gradient(180deg, var(--bg-pink) 0%, var(--bg-pink-2) 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 20px 14px 48px;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
 
-        .floating-particle {
-            position: fixed;
-            top: -50px;
-            pointer-events: none;
-            z-index: 0;
-            animation: floatDown linear infinite;
-            user-select: none;
-        }
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-        /* Cute Penguin Animations */
-        @keyframes waddle {
-            0%, 100% { transform: rotate(-4deg) translateY(0); }
-            50% { transform: rotate(4deg) translateY(-4px); }
-        }
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+    }
 
-        @keyframes flapLeft {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(25deg); }
-        }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 18px;
+      background: var(--plum);
+      color: var(--plum-text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
 
-        @keyframes flapRight {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-25deg); }
-        }
+    .dots {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
 
-        @keyframes pulseHeart {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.18); }
-        }
+    .dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff77ad;
+      opacity: 0.85;
+    }
 
-        .penguin-waddle {
-            transform-origin: bottom center;
-            animation: waddle 2.2s ease-in-out infinite;
-        }
+    .topbar-path {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #f4c6da;
+    }
 
-        .wing-left {
-            transform-origin: 48px 95px;
-            animation: flapLeft 1.1s ease-in-out infinite;
-        }
+    .topbar-pill {
+      background: rgba(255, 119, 173, 0.16);
+      color: #ff9ec4;
+      padding: 4px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      font-size: 11px;
+    }
 
-        .wing-right {
-            transform-origin: 152px 95px;
-            animation: flapRight 1.1s ease-in-out infinite;
-        }
+    .poster-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
 
-        .heart-beat {
-            transform-origin: center;
-            animation: pulseHeart 1.2s ease-in-out infinite;
-        }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--pink-dark);
+      background: var(--pink-soft);
+      padding: 6px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
-        /* Terminal Blinking Cursor */
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-        .cursor-blink {
-            animation: blink 1s infinite;
-        }
+    .meta-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        /* Game Canvas Styling */
-        #gameCanvas {
-            background: linear-gradient(180deg, #2d1423 0%, #421d33 75%, #ffe4ec 75%, #ffffff 100%);
-            border-radius: 1rem;
-            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.4);
-            touch-action: none; /* Prevents scrolling while dragging on canvas */
-            cursor: pointer;
-        }
+    .btn-ghost, .pill-toggle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 7px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #ffe4ec;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #fb7195;
-            border-radius: 9999px;
-        }
-    </style>
+    .btn-ghost {
+      color: var(--plum-text);
+      background: var(--plum);
+      border: none;
+    }
+
+    .pill-toggle {
+      color: var(--ink);
+      background: #fff5f9;
+      border: 1px solid #f0c2d5;
+    }
+
+    .pill-toggle.muted {
+      opacity: 0.6;
+    }
+
+    .btn-ghost:active, .pill-toggle:active {
+      transform: scale(0.97);
+    }
+
+    .hero-poster {
+      background: linear-gradient(160deg, #fff2f7 0%, #ffe4ef 100%);
+      border: 1px solid #f8cedf;
+      border-radius: 20px;
+      padding: 24px 18px;
+      text-align: center;
+    }
+
+    .penguin-stage {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 12px;
+      display: grid;
+      place-items: center;
+      animation: floaty 3.2s ease-in-out infinite;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .code-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--pink-dark);
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.18;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 38ch;
+      margin: 0 auto;
+    }
+
+    .snippet-box {
+      margin-top: 16px;
+      background: var(--plum);
+      color: var(--plum-text);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .snippet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: #e6b8cc;
+    }
+
+    .snippet-head span {
+      white-space: nowrap;
+    }
+
+    pre {
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #ffeaf2;
+    }
+
+    .kw { color: #ff85b7; }
+    .str { color: #ffd0e3; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-primary, .btn-secondary {
+      min-height: 46px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: #fff;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: #fff5f9;
+      color: var(--ink);
+      border: 1px solid #f2c4d7;
+    }
+
+    .btn-primary:active, .btn-secondary:active {
+      transform: scale(0.98);
+    }
+
+    .toast {
+      margin-top: 10px;
+      min-height: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--pink-dark);
+      text-align: center;
+    }
+
+    .floating-heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 18px;
+      animation: riseHeart 1.25s ease-out forwards;
+      z-index: 5;
+    }
+
+    @keyframes riseHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.8);
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-56px) scale(1.15);
+      }
+    }
+
+    .editor-panel {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .editor-panel.open {
+      display: block;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--muted);
+    }
+
+    .field input, .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #ecc4d5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      background: #fffafd;
+    }
+
+    .field textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .game-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .game-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--pink-dark);
+      margin-bottom: 4px;
+    }
+
+    .game-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+    }
+
+    .game-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .sound-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 7px 10px;
+      border-radius: 11px;
+      border: 1px solid #f0c2d5;
+      background: #fff5f9;
+      color: var(--ink);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .sound-btn.muted {
+      opacity: 0.65;
+    }
+
+    .scores {
+      display: flex;
+      gap: 6px;
+    }
+
+    .score-box {
+      background: var(--plum);
+      color: var(--plum-text);
+      padding: 6px 10px;
+      border-radius: 12px;
+      text-align: center;
+      min-width: 56px;
+    }
+
+    .score-box.light {
+      background: #fff3f8;
+      color: var(--ink);
+      border: 1px solid #f0c2d5;
+    }
+
+    .score-label {
+      font-size: 10px;
+      opacity: 0.8;
+      display: block;
+    }
+
+    .score-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .game-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1.5px solid #f2c5d8;
+      background: linear-gradient(180deg, #fff0f6 0%, #ffdce9 100%);
+      touch-action: none;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 290px;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(36, 20, 31, 0.72);
+      backdrop-filter: blur(3px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .overlay.hidden {
+      display: none;
+    }
+
+    .overlay h3 {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .overlay p {
+      font-size: 13px;
+      color: #f8d8e6;
+      max-width: 30ch;
+      margin-bottom: 14px;
+    }
+
+    .touch-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pad-btn {
+      min-height: 44px;
+      border-radius: 12px;
+      border: 1px solid #f0c2d5;
+      background: #fff6fa;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .pad-btn:active {
+      background: var(--pink-soft);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 4px;
+    }
+  </style>
 </head>
-<body class="font-sans text-plum-950 antialiased selection:bg-rosepink-400 selection:text-white relative">
-
-    <!-- Background Particles Container -->
-    <div id="particles-container" aria-hidden="true"></div>
-
-    <!-- Main Content Wrapper -->
-    <div class="relative z-10 max-w-6xl mx-auto px-4 py-6 sm:py-10">
-        
-        <!-- Top Terminal Header Bar -->
-        <header class="mb-8 bg-plum-950/95 backdrop-blur-md text-rosepink-100 rounded-2xl p-4 sm:px-6 shadow-xl border border-rosepink-400/30 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <!-- macOS style pink terminal dots -->
-                <div class="flex gap-2">
-                    <span class="w-3.5 h-3.5 rounded-full bg-rosepink-500 inline-block shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 rounded-full bg-rosepink-300 inline-block shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 rounded-full bg-pink-200 inline-block shadow-sm"></span>
-                </div>
-                <span class="font-mono text-xs sm:text-sm text-rosepink-300 ml-2">
-                    ~/gratitude/penguin_poster.exe
-                </span>
-            </div>
-            <div class="font-mono text-xs sm:text-sm flex items-center gap-2 text-rosepink-200">
-                <span class="px-2.5 py-1 rounded-full bg-plum-800 border border-rosepink-400/30 text-rosepink-300">
-                    status: <span class="text-pink-300 font-bold">200 OK ♥</span>
-                </span>
-            </div>
-        </header>
-
-        <!-- Two-Column Grid: Left = Thank You Code Poster, Right = Penguin Mini-Game -->
-        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- LEFT COLUMN: THE THANK YOU POSTER (7 cols on desktop) -->
-            <section class="lg:col-span-7 bg-white/85 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-white relative overflow-hidden">
-                
-                <!-- Decorative Corner Code Tag -->
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                    <span class="font-mono text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-rosepink-100 text-rosepink-600 border border-rosepink-200">
-                        &lt;Poster mode="kawaii-dev" /&gt;
-                    </span>
-                    <button id="toggleEditBtn" class="font-mono text-xs px-3 py-1.5 rounded-xl bg-plum-900 text-rosepink-200 hover:bg-plum-800 transition shadow-sm flex items-center gap-1.5">
-                        <span>✎</span> <span id="editBtnText">Customize Note</span>
-                    </button>
-                </div>
-
-                <!-- Poster Hero Title & Animated Penguin -->
-                <div class="flex flex-col sm:flex-row items-center gap-6 my-4 bg-gradient-to-br from-rosepink-50 to-pink-100/80 p-5 rounded-2xl border border-rosepink-200/80">
-                    
-                    <!-- Cute Animated SVG Penguin -->
-                    <div class="w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0 flex items-center justify-center">
-                        <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md penguin-waddle" role="img" aria-label="Cute pink-scarf penguin waving">
-                            <!-- Feet -->
-                            <ellipse cx="75" cy="178" rx="18" ry="9" fill="#fb7195" />
-                            <ellipse cx="125" cy="178" rx="18" ry="9" fill="#fb7195" />
-                            
-                            <!-- Left Wing -->
-                            <path class="wing-left" d="M 48 90 C 20 105, 22 140, 46 142 C 55 142, 55 110, 48 90 Z" fill="#2d1423" />
-                            <!-- Right Wing -->
-                            <path class="wing-right" d="M 152 90 C 180 105, 178 140, 154 142 C 145 142, 145 110, 152 90 Z" fill="#2d1423" />
-
-                            <!-- Penguin Body (Dark Plum/Berry for soft contrast) -->
-                            <ellipse cx="100" cy="112" rx="56" ry="68" fill="#2d1423" />
-                            
-                            <!-- White/Soft Pink Belly -->
-                            <ellipse cx="100" cy="122" rx="40" ry="50" fill="#fff1f5" />
-
-                            <!-- Cute Blush Cheeks -->
-                            <ellipse cx="68" cy="82" rx="8" ry="5" fill="#fda4ba" opacity="0.85" />
-                            <ellipse cx="132" cy="82" rx="8" ry="5" fill="#fda4ba" opacity="0.85" />
-
-                            <!-- Happy Eyes (^ ^) -->
-                            <path d="M 70 72 Q 77 63 84 72" stroke="#2d1423" stroke-width="4" fill="none" stroke-linecap="round" />
-                            <path d="M 116 72 Q 123 63 130 72" stroke="#2d1423" stroke-width="4" fill="none" stroke-linecap="round" />
-                            <!-- White eye highlights on dark upper face -->
-                            <circle cx="77" cy="68" r="2.5" fill="#ffffff" />
-                            <circle cx="123" cy="68" r="2.5" fill="#ffffff" />
-
-                            <!-- Beak -->
-                            <path d="M 90 79 Q 100 75 110 79 Q 100 91 90 79 Z" fill="#fb7195" />
-
-                            <!-- Cozy Pink Scarf -->
-                            <path d="M 55 96 Q 100 112 145 96 Q 148 107 142 110 Q 100 125 58 110 Q 52 107 55 96 Z" fill="#f43f70" />
-                            <path d="M 118 106 L 130 142 L 114 145 L 106 110 Z" fill="#e11d56" />
-                            <!-- Scarf Stripes -->
-                            <line x1="115" y1="135" x2="127" y2="133" stroke="#ffe4ec" stroke-width="3" />
-
-                            <!-- Floating Heart Held on Belly -->
-                            <path class="heart-beat" d="M 100 145 C 100 145, 82 132, 82 121 C 82 114, 90 111, 100 119 C 110 111, 118 114, 118 121 C 118 132, 100 145, 100 145 Z" fill="#f43f70" />
-                        </svg>
-                    </div>
-
-                    <!-- Headline & Code Greeting -->
-                    <div class="text-center sm:text-left">
-                        <p class="font-mono text-xs sm:text-sm text-rosepink-600 font-semibold mb-1">
-                            console.log("Sending big penguin hugs!");
-                        </p>
-                        <h1 id="posterTitleDisplay" class="text-3xl sm:text-4xl font-bold text-plum-950 tracking-tight mb-2">
-                            Thank You So Much!
-                        </h1>
-                        <p class="text-plum-800 font-medium text-sm sm:text-base">
-                            For being awesome, supportive, and making the world a brighter, sweeter place.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Interactive Edit Form (Hidden by default) -->
-                <div id="editPanel" class="hidden mb-5 bg-rosepink-50 p-4 rounded-2xl border border-rosepink-300 space-y-3">
-                    <div class="font-mono text-xs font-bold text-plum-900">// Customize your Thank You Poster:</div>
-                    <div>
-                        <label class="block text-xs font-semibold text-plum-800 mb-1">Recipient / Headline:</label>
-                        <input type="text" id="inputTitle" value="Thank You So Much!" maxlength="40"
-                            class="w-full px-3 py-2 rounded-xl border border-rosepink-300 bg-white text-plum-950 font-semibold focus:outline-none focus:ring-2 focus:ring-rosepink-500 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-plum-800 mb-1">Personal Message:</label>
-                        <textarea id="inputMessage" rows="3" maxlength="220"
-                            class="w-full px-3 py-2 rounded-xl border border-rosepink-300 bg-white text-plum-950 focus:outline-none focus:ring-2 focus:ring-rosepink-500 text-sm">Your kindness means the entire world to me! Even a colony of penguins couldn't carry all the gratitude I have for you. Keep shining bright! 💖🐧</textarea>
-                    </div>
-                    <div class="flex justify-end gap-2">
-                        <button id="savePosterBtn" class="px-4 py-2 rounded-xl bg-rosepink-500 hover:bg-rosepink-600 text-white font-semibold text-xs shadow transition">
-                            Apply Changes ✓
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Code-Styled Gratitude Block -->
-                <div class="bg-plum-950 text-rosepink-100 rounded-2xl p-5 font-mono text-xs sm:text-sm shadow-inner border border-plum-800 relative">
-                    <div class="flex items-center justify-between text-rosepink-400 text-xs mb-3 pb-2 border-b border-plum-800">
-                        <span>gratitude_message.js</span>
-                        <span>UTF-8 • Pink Edition</span>
-                    </div>
-                    
-                    <pre class="whitespace-pre-wrap leading-relaxed"><span class="text-rosepink-400">const</span> <span class="text-pink-300 font-bold">thankYouNote</span> = {
-  <span class="text-rosepink-300">from</span>: <span class="text-amber-200">"Your Friendly Coding Penguin 🐧"</span>,
-  <span class="text-rosepink-300">vibe</span>: <span class="text-amber-200">"100% Pastel Pink &amp; Appreciation"</span>,
-  <span class="text-rosepink-300">message</span>: <span id="posterMessageDisplay" class="text-pink-200">"Your kindness means the entire world to me! Even a colony of penguins couldn't carry all the gratitude I have for you. Keep shining bright! 💖🐧"</span>
-};
-
-<span class="text-rosepink-400">return</span> thankYouNote.<span class="text-pink-300">sendHugs</span>();<span class="cursor-blink text-rosepink-400 font-bold">▋</span></pre>
-                </div>
-
-                <!-- Poster Footer Actions -->
-                <div class="mt-6 flex flex-wrap items-center justify-between gap-3">
-                    <button id="copyNoteBtn" class="flex-1 sm:flex-none px-5 py-3 rounded-xl bg-rosepink-500 hover:bg-rosepink-600 active:scale-95 text-white font-semibold text-sm shadow-md shadow-rosepink-500/25 transition flex items-center justify-center gap-2">
-                        <span>📋</span> <span id="copyBtnLabel">Copy Thank You Note</span>
-                    </button>
-                    <button id="burstHeartsBtn" class="flex-1 sm:flex-none px-5 py-3 rounded-xl bg-rosepink-100 hover:bg-rosepink-200 active:scale-95 text-rosepink-700 font-semibold text-sm border border-rosepink-300 transition flex items-center justify-center gap-2">
-                        <span>💖</span> Send Penguin Cheer
-                    </button>
-                </div>
-            </section>
-
-            <!-- RIGHT COLUMN: PLAYABLE PENGUIN MINI-GAME (5 cols on desktop) -->
-            <section class="lg:col-span-5 bg-white/85 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-2 border-white flex flex-col">
-                
-                <!-- Game Header -->
-                <div class="flex items-center justify-between mb-3">
-                    <div>
-                        <span class="font-mono text-xs text-rosepink-600 font-bold block">// MINI-GAME.SH</span>
-                        <h2 class="text-xl font-bold text-plum-950">Catch the Pink Treats!</h2>
-                    </div>
-                    <div class="flex gap-2 font-mono text-xs sm:text-sm">
-                        <div class="bg-plum-950 text-rosepink-200 px-3 py-1.5 rounded-xl border border-rosepink-400/30">
-                            Score: <span id="scoreDisplay" class="text-pink-300 font-bold">0</span>
-                        </div>
-                        <div class="bg-rosepink-100 text-rosepink-700 px-3 py-1.5 rounded-xl border border-rosepink-300 font-bold">
-                            Best: <span id="highScoreDisplay">0</span>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="text-xs sm:text-sm text-plum-800 mb-3">
-                    Help Pippin the Penguin catch falling <strong>Pink Fish 🐟</strong> &amp; <strong>Hearts 💖</strong>! Avoid the <strong>Snowballs ❄️</strong>!
-                </p>
-
-                <!-- Responsive Canvas Wrapper -->
-                <div id="canvasWrapper" class="relative w-full aspect-[4/4] max-h-[380px] rounded-2xl overflow-hidden border-2 border-rosepink-300 shadow-lg bg-plum-950">
-                    <canvas id="gameCanvas" class="w-full h-full block"></canvas>
-
-                    <!-- Start / Game Over Overlay -->
-                    <div id="gameOverlay" class="absolute inset-0 bg-plum-950/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center transition-opacity">
-                        <div class="text-4xl mb-2">🐧💖🐟</div>
-                        <h3 id="overlayTitle" class="text-2xl font-bold text-white mb-1">Penguin Snack Catcher</h3>
-                        <p id="overlaySubtitle" class="font-mono text-xs text-rosepink-200 mb-5 max-w-xs">
-                            Use Arrow Keys, A/D, or Drag/Touch to move your penguin!
-                        </p>
-                        <button id="startGameBtn" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-rosepink-500 to-pink-500 hover:from-rosepink-600 hover:to-pink-600 text-white font-bold text-sm shadow-lg shadow-rosepink-500/40 active:scale-95 transition">
-                            ▶ Start Mini-Game
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Touch / Click Controls Below Canvas for Easy Mobile Play -->
-                <div class="mt-4 flex items-center justify-center gap-4">
-                    <button id="btnLeft" aria-label="Move Left" class="flex-1 py-3 rounded-2xl bg-plum-900 hover:bg-plum-800 active:bg-rosepink-500 text-rosepink-100 font-mono font-bold text-lg shadow transition select-none">
-                        ◀ Left
-                    </button>
-                    <button id="btnRight" aria-label="Move Right" class="flex-1 py-3 rounded-2xl bg-plum-900 hover:bg-plum-800 active:bg-rosepink-500 text-rosepink-100 font-mono font-bold text-lg shadow transition select-none">
-                        Right ▶
-                    </button>
-                </div>
-
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="mt-8 text-center font-mono text-xs text-plum-800/80">
-            Made with 💖, 🐧 &amp; pastel pink code • 100% Single-File HTML/CSS/JS
-        </footer>
+<body>
+  <main class="container">
+    <div class="topbar">
+      <div class="dots" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="topbar-path">thank-you / khushi</div>
+      <div class="topbar-pill">pink-ui</div>
     </div>
 
-    <!-- Custom Toast Notification Box (Replaces alert()) -->
-    <div id="toastBox" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <div class="bg-plum-950 text-rosepink-100 border border-rosepink-400 px-4 py-3 rounded-2xl shadow-2xl font-mono text-xs sm:text-sm flex items-center gap-2">
-            <span id="toastIcon">🐧</span>
-            <span id="toastMessage">Copied to clipboard!</span>
+    <section class="card" id="posterCard">
+      <div class="poster-meta">
+        <span class="tag">for khushi</span>
+        <div class="meta-actions">
+          <button class="pill-toggle" id="musicToggleBtn" type="button" aria-pressed="true">Music: On</button>
+          <button class="btn-ghost" id="toggleEditBtn" type="button">Edit Note</button>
         </div>
-    </div>
+      </div>
 
-    <script>
-        /**
-         * ==========================================
-         * 1. FLOATING PARTICLES & POSTER INTERACTIVITY
-         * ==========================================
-         */
-        const particlesContainer = document.getElementById('particles-container');
-        const particleSymbols = ['❄️', '💖', '🌸', '✨', '🤍'];
+      <div class="hero-poster">
+        <div class="penguin-stage" aria-hidden="true">
+          <svg width="104" height="104" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="66" rx="34" ry="40" fill="#23141e"/>
+            <ellipse cx="60" cy="70" rx="22" ry="28" fill="#fff9fb"/>
+            <circle cx="48" cy="46" r="4.5" fill="#fff"/>
+            <circle cx="72" cy="46" r="4.5" fill="#fff"/>
+            <circle cx="48.5" cy="46.5" r="2.2" fill="#23141e"/>
+            <circle cx="71.5" cy="46.5" r="2.2" fill="#23141e"/>
+            <circle cx="41" cy="54" r="5" fill="#ff8ab8" opacity="0.65"/>
+            <circle cx="79" cy="54" r="5" fill="#ff8ab8" opacity="0.65"/>
+            <polygon points="55,53 65,53 60,61" fill="#ff8c42"/>
+            <path d="M35 66 Q60 76 85 66 L82 75 Q60 84 38 75 Z" fill="#ec4888"/>
+            <circle cx="60" cy="82" r="6.5" fill="#ec4888"/>
+            <ellipse cx="47" cy="105" rx="9" ry="4.5" fill="#ff8c42"/>
+            <ellipse cx="73" cy="105" rx="9" ry="4.5" fill="#ff8c42"/>
+          </svg>
+        </div>
 
-        function createFloatingParticles() {
-            const count = 20;
-            for (let i = 0; i < count; i++) {
-                const el = document.createElement('div');
-                el.className = 'floating-particle text-lg sm:text-xl';
-                el.textContent = particleSymbols[Math.floor(Math.random() * particleSymbols.length)];
-                el.style.left = `${Math.random() * 100}vw`;
-                el.style.animationDuration = `${8 + Math.random() * 12}s`;
-                el.style.animationDelay = `${-Math.random() * 15}s`;
-                el.style.fontSize = `${14 + Math.random() * 14}px`;
-                particlesContainer.appendChild(el);
-            }
+        <div class="code-line">// genuinely grateful</div>
+        <h1 id="posterHeading">Thank You, Khushi</h1>
+        <p class="subtitle" id="posterSubtext">
+          Thank you for your kindness, warmth, and the positive energy you bring every day.
+        </p>
+      </div>
+
+      <div class="snippet-box">
+        <div class="snippet-head">
+          <span>note.js</span>
+          <span>utf-8</span>
+        </div>
+        <pre id="codeNote"><span class="kw">const</span> appreciation = {
+  to: <span class="str">"Khushi"</span>,
+  message: <span class="str">"Genuinely grateful for your support and good heart."</span>
+};</pre>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" id="copyBtn" type="button">Copy Note</button>
+        <button class="btn-secondary" id="cheerBtn" type="button">Send Cheer</button>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <div class="editor-panel" id="editorPanel">
+        <div class="field">
+          <label for="nameInput">Recipient Name</label>
+          <input id="nameInput" type="text" value="Khushi" maxlength="40" />
+        </div>
+        <div class="field">
+          <label for="msgInput">Personal Message</label>
+          <textarea id="msgInput" maxlength="180">Thank you for your kindness, warmth, and the positive energy you bring every day.</textarea>
+        </div>
+        <button class="btn-primary" id="saveNoteBtn" type="button" style="width:100%;">Update Poster</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="game-top">
+        <div>
+          <div class="game-kicker">// mini-game</div>
+          <h2 class="game-title">Penguin Treat Catch</h2>
+        </div>
+        <div class="game-controls-right">
+          <button class="sound-btn" id="soundToggleBtn" type="button" aria-pressed="true">SFX: On</button>
+          <div class="scores">
+            <div class="score-box">
+              <span class="score-label">SCORE</span>
+              <span class="score-val" id="scoreVal">0</span>
+            </div>
+            <div class="score-box light">
+              <span class="score-label">BEST</span>
+              <span class="score-val" id="bestVal">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="game-desc">Catch pink treats for points and dodge snowballs. Move with arrow keys, drag, or tap below.</p>
+
+      <div class="canvas-wrap">
+        <canvas id="gameCanvas" width="480" height="290"></canvas>
+        <div class="overlay" id="overlay">
+          <h3 id="overlayTitle">Ready to Play?</h3>
+          <p id="overlayText">Catch hearts &amp; fish. Avoid snowballs!</p>
+          <button class="btn-primary" id="startGameBtn" type="button">Start Game</button>
+        </div>
+      </div>
+
+      <div class="touch-controls">
+        <button class="pad-btn" id="leftBtn" type="button">← Move Left</button>
+        <button class="pad-btn" id="rightBtn" type="button">Move Right →</button>
+      </div>
+    </section>
+
+    <footer>Crafted in pink • HTML, CSS &amp; JavaScript</footer>
+  </main>
+
+  <script>
+    // Soft lullaby background melody + game SFX
+    let sfxEnabled = true;
+    let musicEnabled = true;
+    let audioCtx = null;
+    let bgmTimer = null;
+    let noteStep = 0;
+
+    const penguinLullaby = [
+      { freq: 523.25, dur: 0.44 }, // C5
+      { freq: 659.25, dur: 0.42 }, // E5
+      { freq: 783.99, dur: 0.50 }, // G5
+      { freq: 880.00, dur: 0.44 }, // A5
+      { freq: 783.99, dur: 0.42 }, // G5
+      { freq: 659.25, dur: 0.54 }, // E5
+      { freq: 587.33, dur: 0.44 }, // D5
+      { freq: 698.46, dur: 0.56 }  // F5
+    ];
+
+    function ensureAudioContext() {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return null;
+      if (!audioCtx) audioCtx = new Ctx();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, duration = 0.12, type = 'sine', volume = 0.08, delay = 0) {
+      const ctx = ensureAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime + delay;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(volume, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + duration + 0.03);
+    }
+
+    function playBackgroundNote() {
+      if (!musicEnabled) return;
+      const ctx = ensureAudioContext();
+      if (!ctx || ctx.state !== 'running') return;
+
+      const note = penguinLullaby[noteStep % penguinLullaby.length];
+      noteStep += 1;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const overtone = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const overtoneGain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(note.freq, now);
+
+      overtone.type = 'triangle';
+      overtone.frequency.setValueAtTime(note.freq * 2, now);
+      overtoneGain.gain.setValueAtTime(0.14, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.024, now + 0.035);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + note.dur);
+
+      osc.connect(gain);
+      overtone.connect(overtoneGain);
+      overtoneGain.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      overtone.start(now);
+      osc.stop(now + note.dur + 0.04);
+      overtone.stop(now + note.dur + 0.04);
+    }
+
+    function startBackgroundMusic() {
+      if (bgmTimer || !musicEnabled) return;
+      playBackgroundNote();
+      bgmTimer = setInterval(playBackgroundNote, 560);
+    }
+
+    function stopBackgroundMusic() {
+      if (bgmTimer) {
+        clearInterval(bgmTimer);
+        bgmTimer = null;
+      }
+    }
+
+    ['pointerdown', 'keydown'].forEach((ev) => {
+      window.addEventListener(ev, () => {
+        if (musicEnabled) {
+          ensureAudioContext();
+          startBackgroundMusic();
         }
-        createFloatingParticles();
+      }, { once: true });
+    });
 
-        // Toast Notification Helper (Safe alternative to alert)
-        let toastTimeout;
-        function showToast(msg, icon = '💖') {
-            const toastBox = document.getElementById('toastBox');
-            document.getElementById('toastMessage').textContent = msg;
-            document.getElementById('toastIcon').textContent = icon;
-            
-            toastBox.classList.remove('translate-y-20', 'opacity-0');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toastBox.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+    function playCatchSound(isHeart) {
+      if (!sfxEnabled) return;
+      if (isHeart) {
+        playTone(660, 0.11, 'triangle', 0.075, 0);
+        playTone(880, 0.14, 'triangle', 0.075, 0.06);
+      } else {
+        playTone(587.33, 0.11, 'sine', 0.07, 0);
+      }
+    }
+
+    function playHitSnowSound() {
+      if (!sfxEnabled) return;
+      playTone(190, 0.22, 'sawtooth', 0.065, 0);
+      playTone(135, 0.26, 'sine', 0.075, 0.07);
+    }
+
+    function playClickSound() {
+      if (!sfxEnabled) return;
+      playTone(520, 0.06, 'sine', 0.05, 0);
+    }
+
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    musicToggleBtn.addEventListener('click', () => {
+      musicEnabled = !musicEnabled;
+      musicToggleBtn.textContent = musicEnabled ? 'Music: On' : 'Music: Off';
+      musicToggleBtn.setAttribute('aria-pressed', String(musicEnabled));
+      musicToggleBtn.classList.toggle('muted', !musicEnabled);
+      if (musicEnabled) {
+        ensureAudioContext();
+        startBackgroundMusic();
+      } else {
+        stopBackgroundMusic();
+      }
+    });
+
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    soundToggleBtn.addEventListener('click', () => {
+      sfxEnabled = !sfxEnabled;
+      soundToggleBtn.textContent = sfxEnabled ? 'SFX: On' : 'SFX: Off';
+      soundToggleBtn.setAttribute('aria-pressed', String(sfxEnabled));
+      soundToggleBtn.classList.toggle('muted', !sfxEnabled);
+      if (sfxEnabled) playClickSound();
+    });
+
+    // Note customization, copy & floating hearts
+    const posterCard = document.getElementById('posterCard');
+    const toggleEditBtn = document.getElementById('toggleEditBtn');
+    const editorPanel = document.getElementById('editorPanel');
+    const nameInput = document.getElementById('nameInput');
+    const msgInput = document.getElementById('msgInput');
+    const saveNoteBtn = document.getElementById('saveNoteBtn');
+    const posterHeading = document.getElementById('posterHeading');
+    const posterSubtext = document.getElementById('posterSubtext');
+    const codeNote = document.getElementById('codeNote');
+    const copyBtn = document.getElementById('copyBtn');
+    const cheerBtn = document.getElementById('cheerBtn');
+    const toast = document.getElementById('toast');
+
+    let currentName = 'Khushi';
+    let currentMessage = 'Thank you for your kindness, warmth, and the positive energy you bring every day.';
+
+    function renderNote() {
+      posterHeading.textContent = `Thank You, ${currentName}`;
+      posterSubtext.textContent = currentMessage;
+      codeNote.innerHTML =
+        `<span class="kw">const</span> appreciation = {\n` +
+        `  to: <span class="str">"${escapeHtml(currentName)}"</span>,\n` +
+        `  message: <span class="str">"${escapeHtml(currentMessage)}"</span>\n` +
+        `};`;
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function spawnFloatingHearts() {
+      const icons = ['💖', '🌸', '💗'];
+      for (let i = 0; i < 4; i++) {
+        const el = document.createElement('span');
+        el.className = 'floating-heart';
+        el.textContent = icons[i % icons.length];
+        el.style.left = `${22 + i * 18 + Math.random() * 8}%`;
+        el.style.bottom = '72px';
+        el.style.animationDelay = `${i * 0.08}s`;
+        posterCard.appendChild(el);
+        setTimeout(() => el.remove(), 1350);
+      }
+    }
+
+    toggleEditBtn.addEventListener('click', () => {
+      playClickSound();
+      editorPanel.classList.toggle('open');
+    });
+
+    saveNoteBtn.addEventListener('click', () => {
+      playClickSound();
+      const n = nameInput.value.trim();
+      const m = msgInput.value.trim();
+      if (n) currentName = n;
+      if (m) currentMessage = m;
+      renderNote();
+      editorPanel.classList.remove('open');
+      toast.textContent = `Updated poster for ${currentName}.`;
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      playClickSound();
+      const text = `Thank You, ${currentName} — ${currentMessage}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.textContent = 'Thank-you note copied to clipboard.';
+      } catch {
+        toast.textContent = 'Select or copy the note text directly.';
+      }
+    });
+
+    cheerBtn.addEventListener('click', () => {
+      playCatchSound(true);
+      spawnFloatingHearts();
+      const cheers = [
+        `Sending a warm cheer over to ${currentName}!`,
+        `A little extra pink positivity headed ${currentName}'s way.`,
+        `Appreciation ping sent for ${currentName}.`
+      ];
+      toast.textContent = cheers[Math.floor(Math.random() * cheers.length)];
+    });
+
+    // Mini-game
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('overlay');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText = document.getElementById('overlayText');
+    const startGameBtn = document.getElementById('startGameBtn');
+    const scoreVal = document.getElementById('scoreVal');
+    const bestVal = document.getElementById('bestVal');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+
+    let bestScore = Number(localStorage.getItem('penguinBestScore') || 0);
+    bestVal.textContent = bestScore;
+
+    let running = false;
+    let score = 0;
+    let items = [];
+    let spawnTimer = 0;
+    let moveLeft = false;
+    let moveRight = false;
+    let lastTime = 0;
+
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height - 36,
+      speed: 320
+    };
+
+    function resetGame() {
+      score = 0;
+      items = [];
+      spawnTimer = 0;
+      player.x = canvas.width / 2;
+      scoreVal.textContent = '0';
+    }
+
+    function startGame() {
+      playClickSound();
+      if (musicEnabled) {
+        ensureAudioContext();
+        startBackgroundMusic();
+      }
+      resetGame();
+      running = true;
+      lastTime = performance.now();
+      overlay.classList.add('hidden');
+      requestAnimationFrame(loop);
+    }
+
+    function endGame() {
+      running = false;
+      playHitSnowSound();
+      if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem('penguinBestScore', String(bestScore));
+        bestVal.textContent = bestScore;
+      }
+      overlayTitle.textContent = 'Round Complete';
+      overlayText.textContent = `You scored ${score} points for ${currentName}'s penguin.`;
+      startGameBtn.textContent = 'Play Again';
+      overlay.classList.remove('hidden');
+    }
+
+    function spawnItem() {
+      const roll = Math.random();
+      const type = roll < 0.45 ? 'heart' : roll < 0.78 ? 'fish' : 'snow';
+      items.push({
+        x: 24 + Math.random() * (canvas.width - 48),
+        y: -20,
+        vy: 120 + Math.random() * 75 + Math.min(score * 1.5, 90),
+        type
+      });
+    }
+
+    function drawPenguin() {
+      const { x, y } = player;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.fillStyle = '#23141e';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 18, 22, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#fff9fb';
+      ctx.beginPath();
+      ctx.ellipse(0, 3, 11, 15, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#e94b8a';
+      ctx.fillRect(-13, -6, 26, 5);
+      ctx.restore();
+    }
+
+    function drawItem(item) {
+      ctx.save();
+      ctx.translate(item.x, item.y);
+      ctx.font = '20px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const glyph = item.type === 'heart' ? '💖' : item.type === 'fish' ? '🐟' : '❄️';
+      ctx.fillText(glyph, 0, 0);
+      ctx.restore();
+    }
+
+    function loop(now) {
+      if (!running) return;
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      if (moveLeft) player.x -= player.speed * dt;
+      if (moveRight) player.x += player.speed * dt;
+      player.x = Math.max(24, Math.min(canvas.width - 24, player.x));
+
+      spawnTimer += dt;
+      if (spawnTimer >= 0.72) {
+        spawnTimer = 0;
+        spawnItem();
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = items.length - 1; i >= 0; i--) {
+        const it = items[i];
+        it.y += it.vy * dt;
+        drawItem(it);
+
+        const hitX = Math.abs(it.x - player.x) < 26;
+        const hitY = Math.abs(it.y - player.y) < 24;
+
+        if (hitX && hitY) {
+          if (it.type === 'snow') {
+            endGame();
+            return;
+          }
+          const isHeart = it.type === 'heart';
+          score += isHeart ? 15 : 10;
+          scoreVal.textContent = score;
+          playCatchSound(isHeart);
+          items.splice(i, 1);
+          continue;
         }
 
-        // Customize Poster Toggle & Save
-        const toggleEditBtn = document.getElementById('toggleEditBtn');
-        const editPanel = document.getElementById('editPanel');
-        const savePosterBtn = document.getElementById('savePosterBtn');
-        const inputTitle = document.getElementById('inputTitle');
-        const inputMessage = document.getElementById('inputMessage');
-        const posterTitleDisplay = document.getElementById('posterTitleDisplay');
-        const posterMessageDisplay = document.getElementById('posterMessageDisplay');
-
-        toggleEditBtn.addEventListener('click', () => {
-            editPanel.classList.toggle('hidden');
-        });
-
-        savePosterBtn.addEventListener('click', () => {
-            const newTitle = inputTitle.value.trim() || "Thank You So Much!";
-            const newMsg = inputMessage.value.trim() || "Thank you for being so wonderful! 💖🐧";
-            posterTitleDisplay.textContent = newTitle;
-            posterMessageDisplay.textContent = JSON.stringify(newMsg);
-            editPanel.classList.add('hidden');
-            showToast("Poster updated with your message!", "✨");
-        });
-
-        // Copy Thank You Note (using execCommand for iFrame compatibility)
-        document.getElementById('copyNoteBtn').addEventListener('click', () => {
-            const textToCopy = `${posterTitleDisplay.textContent}\n\n${inputMessage.value}\n\nSent with love from Pink Penguin Dev 🐧💖`;
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = textToCopy;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            try {
-                document.execCommand('copy');
-                showToast("Thank you note copied to clipboard!", "📋");
-            } catch (err) {
-                showToast("Could not copy text.", "⚠️");
-            }
-            document.body.removeChild(tempTextArea);
-        });
-
-        // Penguin Cheer Heart Burst
-        document.getElementById('burstHeartsBtn').addEventListener('click', () => {
-            showToast("Pippin the Penguin sends you 1,000 hugs! 🐧💕", "🎉");
-            for (let i = 0; i < 12; i++) {
-                const burst = document.createElement('div');
-                burst.textContent = ['💖', '🐧', '🌸', '✨'][i % 4];
-                burst.style.position = 'fixed';
-                burst.style.left = `${20 + Math.random() * 60}vw`;
-                burst.style.top = '60vh';
-                burst.style.fontSize = '24px';
-                burst.style.pointerEvents = 'none';
-                burst.style.zIndex = '50';
-                burst.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
-                document.body.appendChild(burst);
-
-                requestAnimationFrame(() => {
-                    burst.style.transform = `translate(${(Math.random() - 0.5) * 200}px, -${150 + Math.random() * 200}px) scale(1.4)`;
-                    burst.style.opacity = '0';
-                });
-
-                setTimeout(() => burst.remove(), 1250);
-            }
-        });
-
-        /**
-         * ==========================================
-         * 2. INTERACTIVE PENGUIN CATCH MINI-GAME
-         * ==========================================
-         */
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const canvasWrapper = document.getElementById('canvasWrapper');
-        const gameOverlay = document.getElementById('gameOverlay');
-        const overlayTitle = document.getElementById('overlayTitle');
-        const overlaySubtitle = document.getElementById('overlaySubtitle');
-        const startGameBtn = document.getElementById('startGameBtn');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const highScoreDisplay = document.getElementById('highScoreDisplay');
-
-        let gameRunning = false;
-        let score = 0;
-        let highScore = 0;
-        let lives = 3;
-        let animationFrameId;
-        let lastSpawnTime = 0;
-
-        // Player Penguin State
-        const player = {
-            x: 0,
-            y: 0,
-            width: 54,
-            height: 58,
-            speed: 6,
-            movingLeft: false,
-            movingRight: false
-        };
-
-        // Falling Items Array
-        let items = [];
-        let floatingPopups = [];
-
-        // Resize canvas dynamically to fit container
-        function resizeCanvas() {
-            const rect = canvasWrapper.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            player.y = canvas.height - player.height - 14;
-            if (player.x === 0 || player.x > canvas.width - player.width) {
-                player.x = (canvas.width - player.width) / 2;
-            }
-            if (!gameRunning) {
-                drawScene();
-            }
+        if (it.y > canvas.height + 24) {
+          items.splice(i, 1);
         }
+      }
 
-        window.addEventListener('resize', resizeCanvas);
+      drawPenguin();
+      requestAnimationFrame(loop);
+    }
 
-        // Draw cute penguin directly on Canvas
-        function drawCanvasPenguin(x, y, w, h) {
-            ctx.save();
-            const cx = x + w / 2;
-            const cy = y + h / 2;
+    startGameBtn.addEventListener('click', startGame);
 
-            // Feet
-            ctx.fillStyle = '#fb7195';
-            ctx.beginPath();
-            ctx.ellipse(cx - 12, y + h - 3, 9, 5, 0, 0, Math.PI * 2);
-            ctx.ellipse(cx + 12, y + h - 3, 9, 5, 0, 0, Math.PI * 2);
-            ctx.fill();
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = true;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = true;
+    });
 
-            // Body
-            ctx.fillStyle = '#2d1423';
-            ctx.beginPath();
-            ctx.ellipse(cx, cy + 2, w * 0.44, h * 0.46, 0, 0, Math.PI * 2);
-            ctx.fill();
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = false;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = false;
+    });
 
-            // Belly
-            ctx.fillStyle = '#fff1f5';
-            ctx.beginPath();
-            ctx.ellipse(cx, cy + 6, w * 0.31, h * 0.34, 0, 0, Math.PI * 2);
-            ctx.fill();
+    const bindHold = (el, setter) => {
+      el.addEventListener('pointerdown', (e) => { e.preventDefault(); setter(true); });
+      el.addEventListener('pointerup', () => setter(false));
+      el.addEventListener('pointerleave', () => setter(false));
+      el.addEventListener('pointercancel', () => setter(false));
+    };
 
-            // Pink Scarf
-            ctx.strokeStyle = '#f43f70';
-            ctx.lineWidth = 6;
-            ctx.lineCap = 'round';
-            ctx.beginPath();
-            ctx.moveTo(cx - 16, cy - 4);
-            ctx.quadraticCurveTo(cx, cy + 2, cx + 16, cy - 4);
-            ctx.stroke();
+    bindHold(leftBtn, (v) => (moveLeft = v));
+    bindHold(rightBtn, (v) => (moveRight = v));
 
-            // Eyes
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.arc(cx - 9, cy - 13, 3.2, 0, Math.PI * 2);
-            ctx.arc(cx + 9, cy - 13, 3.2, 0, Math.PI * 2);
-            ctx.fill();
+    canvas.addEventListener('pointermove', (e) => {
+      if (!running) return;
+      const rect = canvas.getBoundingClientRect();
+      const relX = ((e.clientX - rect.left) / rect.width) * canvas.width;
+      player.x = Math.max(24, Math.min(canvas.width - 24, relX));
+    });
 
-            // Beak
-            ctx.fillStyle = '#fb7195';
-            ctx.beginPath();
-            ctx.moveTo(cx - 5, cy - 9);
-            ctx.lineTo(cx + 5, cy - 9);
-            ctx.lineTo(cx, cy - 3);
-            ctx.closePath();
-            ctx.fill();
-
-            ctx.restore();
-        }
-
-        function spawnItem() {
-            const rand = Math.random();
-            let type = 'fish'; // +10 pts
-            let emoji = '🐟';
-            let points = 10;
-
-            if (rand > 0.72 && rand <= 0.90) {
-                type = 'heart'; // +25 pts
-                emoji = '💖';
-                points = 25;
-            } else if (rand > 0.90) {
-                type = 'snowball'; // hazard (-1 life)
-                emoji = '❄️';
-                points = 0;
-            }
-
-            const size = 28;
-            items.push({
-                x: Math.random() * (canvas.width - size - 16) + 8,
-                y: -30,
-                size: size,
-                speed: 2.3 + Math.random() * 1.8 + Math.min(score / 150, 2.5),
-                type: type,
-                emoji: emoji,
-                points: points
-            });
-        }
-
-        function addPopup(x, y, text, color) {
-            floatingPopups.push({ x, y, text, color, alpha: 1 });
-        }
-
-        function drawScene() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Subtle Grid Lines in Sky (Code Aesthetic)
-            ctx.strokeStyle = 'rgba(253, 164, 186, 0.08)';
-            ctx.lineWidth = 1;
-            const step = 32;
-            for (let gx = 0; gx < canvas.width; gx += step) {
-                ctx.beginPath();
-                ctx.moveTo(gx, 0);
-                ctx.lineTo(gx, canvas.height * 0.75);
-                ctx.stroke();
-            }
-            for (let gy = 0; gy < canvas.height * 0.75; gy += step) {
-                ctx.beginPath();
-                ctx.moveTo(0, gy);
-                ctx.lineTo(canvas.width, gy);
-                ctx.stroke();
-            }
-
-            // Draw Lives (Hearts at top-left)
-            ctx.font = '16px "JetBrains Mono", monospace';
-            ctx.fillStyle = '#fecdd9';
-            ctx.fillText(`Lives: ${'❤️'.repeat(lives)}${'🖤'.repeat(Math.max(0, 3 - lives))}`, 14, 26);
-
-            // Draw Falling Items
-            ctx.font = '24px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            for (const item of items) {
-                ctx.fillText(item.emoji, item.x + item.size / 2, item.y + item.size / 2);
-            }
-
-            // Draw Player Penguin
-            drawCanvasPenguin(player.x, player.y, player.width, player.height);
-
-            // Draw Score Popups
-            for (const p of floatingPopups) {
-                ctx.save();
-                ctx.globalAlpha = p.alpha;
-                ctx.font = 'bold 14px "JetBrains Mono", monospace';
-                ctx.fillStyle = p.color;
-                ctx.fillText(p.text, p.x, p.y);
-                ctx.restore();
-            }
-        }
-
-        function updateGame(timestamp) {
-            if (!gameRunning) return;
-
-            // Spawn items periodically
-            if (timestamp - lastSpawnTime > Math.max(450, 950 - score * 2)) {
-                spawnItem();
-                lastSpawnTime = timestamp;
-            }
-
-            // Move Player
-            if (player.movingLeft) player.x -= player.speed;
-            if (player.movingRight) player.x += player.speed;
-
-            // Clamp Player within Canvas
-            player.x = Math.max(4, Math.min(canvas.width - player.width - 4, player.x));
-
-            // Update Falling Items & Check Collisions
-            for (let i = items.length - 1; i >= 0; i--) {
-                const item = items[i];
-                item.y += item.speed;
-
-                // Collision box check
-                const hitX = item.x + item.size > player.x + 6 && item.x < player.x + player.width - 6;
-                const hitY = item.y + item.size > player.y + 8 && item.y < player.y + player.height;
-
-                if (hitX && hitY) {
-                    if (item.type === 'snowball') {
-                        lives--;
-                        addPopup(player.x + player.width / 2, player.y - 10, "Brrr! -1 ❤️", "#fda4ba");
-                        if (lives <= 0) {
-                            endGame();
-                            return;
-                        }
-                    } else {
-                        score += item.points;
-                        scoreDisplay.textContent = score;
-                        if (score > highScore) {
-                            highScore = score;
-                            highScoreDisplay.textContent = highScore;
-                        }
-                        addPopup(player.x + player.width / 2, player.y - 10, `+${item.points}`, "#fde047");
-                    }
-                    items.splice(i, 1);
-                    continue;
-                }
-
-                // Remove if off-screen
-                if (item.y > canvas.height + 30) {
-                    items.splice(i, 1);
-                }
-            }
-
-            // Update Popups
-            for (let i = floatingPopups.length - 1; i >= 0; i--) {
-                floatingPopups[i].y -= 1.2;
-                floatingPopups[i].alpha -= 0.025;
-                if (floatingPopups[i].alpha <= 0) {
-                    floatingPopups.splice(i, 1);
-                }
-            }
-
-            drawScene();
-            animationFrameId = requestAnimationFrame(updateGame);
-        }
-
-        function startGame() {
-            score = 0;
-            lives = 3;
-            items = [];
-            floatingPopups = [];
-            scoreDisplay.textContent = '0';
-            player.x = (canvas.width - player.width) / 2;
-            gameRunning = true;
-            gameOverlay.classList.add('opacity-0', 'pointer-events-none');
-            lastSpawnTime = performance.now();
-            animationFrameId = requestAnimationFrame(updateGame);
-        }
-
-        function endGame() {
-            gameRunning = false;
-            cancelAnimationFrame(animationFrameId);
-            drawScene();
-            overlayTitle.textContent = `Sweet Run! Score: ${score}`;
-            overlaySubtitle.textContent = score >= 100 
-                ? "Amazing job! Pippin is super full and happy! 🐧💖" 
-                : "Great effort! Tap below to catch more pink treats!";
-            startGameBtn.textContent = "↻ Play Again";
-            gameOverlay.classList.remove('opacity-0', 'pointer-events-none');
-        }
-
-        startGameBtn.addEventListener('click', startGame);
-
-        // Keyboard Controls
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') player.movingLeft = true;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') player.movingRight = true;
-        });
-
-        window.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') player.movingLeft = false;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') player.movingRight = false;
-        });
-
-        // On-Screen Button Controls (Mouse + Touch)
-        const btnLeft = document.getElementById('btnLeft');
-        const btnRight = document.getElementById('btnRight');
-
-        const bindHoldButton = (btn, dir) => {
-            const start = (e) => { e.preventDefault(); player[dir] = true; };
-            const end = (e) => { e.preventDefault(); player[dir] = false; };
-            btn.addEventListener('mousedown', start);
-            btn.addEventListener('mouseup', end);
-            btn.addEventListener('mouseleave', end);
-            btn.addEventListener('touchstart', start, { passive: false });
-            btn.addEventListener('touchend', end);
-        };
-        bindHoldButton(btnLeft, 'movingLeft');
-        bindHoldButton(btnRight, 'movingRight');
-
-        // Direct Drag / Touch on Canvas
-        function movePenguinToClientX(clientX) {
-            if (!gameRunning) return;
-            const rect = canvas.getBoundingClientRect();
-            const relX = clientX - rect.left;
-            player.x = Math.max(4, Math.min(canvas.width - player.width - 4, relX - player.width / 2));
-        }
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (e.buttons === 1) movePenguinToClientX(e.clientX);
-        });
-        canvas.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                movePenguinToClientX(e.touches[0].clientX);
-            }
-        }, { passive: true });
-        canvas.addEventListener('touchstart', (e) => {
-            if (e.touches.length > 0) {
-                movePenguinToClientX(e.touches[0].clientX);
-            }
-        }, { passive: true });
-
-        // Initialize on Window Load
-        window.onload = function () {
-            resizeCanvas();
-        };
-    </script>
+    renderNote();
+  </script>
 </body>
 </html>
